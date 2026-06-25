@@ -69,7 +69,6 @@ const [originalRequest, setOriginalRequest] = useState("");
     }
   }
 
-  async function copyFormula()
   async function continueWithMoreInfo() {
   if (!followUp.trim()) {
     setError("請先補充缺少的資訊。");
@@ -106,12 +105,16 @@ ${followUp}`;
   } finally {
     setLoading(false);
   }
-}{
-    if (!result?.formula) return;
-    await navigator.clipboard.writeText(result.formula);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1600);
-  }
+}
+
+async function copyFormula() {
+  if (!result?.formula) return;
+
+  await navigator.clipboard.writeText(result.formula);
+
+  setCopied(true);
+  setTimeout(() => setCopied(false), 1600);
+}
 
   return (
     <main>
