@@ -1,6 +1,14 @@
-# AI Excel Assistant
+# # EverySheet
 
-中文 Excel / Google Sheets 公式產生器。
+Excel / Google Sheets 公式助手。
+
+EverySheet 能幫助你快速：
+
+- 建立公式
+- 修正公式
+- 解釋公式
+- 優化公式
+- 支援 Excel 與 Google Sheets
 
 ## 本機啟動
 
