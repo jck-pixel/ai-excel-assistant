@@ -23,6 +23,7 @@ export default function Home() {
   const [request, setRequest] = useState("超過 8 小時算加班費");
   const [tool, setTool] = useState("Excel");
   const [outputMode, setOutputMode] = useState("general");
+  const [mode, setMode] = useState("generate");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState("");
@@ -44,7 +45,7 @@ export default function Home() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ request, tool, outputMode }),
+        body: JSON.stringify({ request, tool, outputMode, mode }),
       });
 
       const data = await res.json();
@@ -71,11 +72,14 @@ export default function Home() {
   return (
     <main>
       <section className="hero">
-        <div className="badge">中文 Excel / Google Sheets 公式產生器</div>
-        <h1>不會 Excel？用中文描述就好。</h1>
-        <p className="subtitle">
-          輸入你的工作需求，AI 會自動產生公式、中文解釋、使用方式與範例，幫你省下查教學和試錯時間。
-        </p>
+<div className="badge">Excel AI Copilot</div>
+
+<h1>你的 AI Excel 工作夥伴</h1>
+
+<p className="subtitle">
+  建立公式、修正公式、解釋公式、優化公式，
+  用自然語言就能完成 Excel 工作。
+</p>
       </section>
 
       <section className="app-card">
@@ -84,17 +88,65 @@ export default function Home() {
           id="request"
           value={request}
           onChange={(e) => setRequest(e.target.value)}
-          placeholder="例如：超過 8 小時算加班費"
+placeholder={`例如：
+
+建立加班費公式
+
+A欄投入數量、B欄不良數量，計算良率
+
+修正這段 VLOOKUP 為什麼找不到資料
+
+解釋這段 IF 公式
+
+幫我把這個公式改成 XLOOKUP`}
         />
 
+        <div className="mode-tabs">
+  <button
+    className={mode === "generate" ? "active" : ""}
+    onClick={() => setMode("generate")}
+  >
+    建立公式
+  </button>
+
+  <button
+    className={mode === "fix" ? "active" : ""}
+    onClick={() => setMode("fix")}
+  >
+    修正公式
+  </button>
+
+  <button
+    className={mode === "explain" ? "active" : ""}
+    onClick={() => setMode("explain")}
+  >
+    解釋公式
+  </button>
+
+  <button
+    className={mode === "optimize" ? "active" : ""}
+    onClick={() => setMode("optimize")}
+  >
+    優化公式
+  </button>
+</div>
+        
         <div className="controls">
           <select value={tool} onChange={(e) => setTool(e.target.value)} aria-label="選擇工具">
             <option>Excel</option>
             <option>Google Sheets</option>
           </select>
           <button onClick={generateFormula} disabled={loading}>
-            {loading ? "產生中..." : "產生公式"}
-          </button>
+  {loading
+    ? "AI 處理中..."
+    : mode === "generate"
+    ? "建立公式"
+    : mode === "fix"
+    ? "修正公式"
+    : mode === "explain"
+    ? "解釋公式"
+    : "優化公式"}
+</button>
         </div>
 
         <div className="mode-box">
