@@ -16,11 +16,13 @@ const examples = [
   "依照姓名查找對應薪資",
   "計算兩個日期相差幾天",
   "統計B欄中出現NG的數量",
+  "A欄是投入數量，B欄是不良數量，我想算良率百分比，保留兩位小數，如果投入數量是0就顯示0%",
 ];
 
 export default function Home() {
   const [request, setRequest] = useState("超過 8 小時算加班費");
   const [tool, setTool] = useState("Excel");
+  const [outputMode, setOutputMode] = useState("general");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState("");
@@ -42,7 +44,7 @@ export default function Home() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ request, tool }),
+        body: JSON.stringify({ request, tool, outputMode }),
       });
 
       const data = await res.json();
@@ -93,6 +95,38 @@ export default function Home() {
           <button onClick={generateFormula} disabled={loading}>
             {loading ? "產生中..." : "產生公式"}
           </button>
+        </div>
+
+        <div className="mode-box">
+          <div className="mode-title">輸出模式</div>
+
+          <label className={`mode-option ${outputMode === "general" ? "active" : ""}`}>
+            <input
+              type="radio"
+              name="outputMode"
+              value="general"
+              checked={outputMode === "general"}
+              onChange={(e) => setOutputMode(e.target.value)}
+            />
+            <div>
+              <strong>一般使用</strong>
+              <span>直接顯示使用者想看的結果，例如 90.13%。適合大多數人。</span>
+            </div>
+          </label>
+
+          <label className={`mode-option ${outputMode === "professional" ? "active" : ""}`}>
+            <input
+              type="radio"
+              name="outputMode"
+              value="professional"
+              checked={outputMode === "professional"}
+              onChange={(e) => setOutputMode(e.target.value)}
+            />
+            <div>
+              <strong>專業 Excel</strong>
+              <span>盡量保留數值，方便後續平均、排序、圖表、樞紐分析。</span>
+            </div>
+          </label>
         </div>
 
         <div className="examples">
