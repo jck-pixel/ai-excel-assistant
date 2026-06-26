@@ -366,3 +366,32 @@ footer {
     flex-direction: column;
   }
 }
+
+.loading-box {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 18px;
+  background: #eef4ff;
+  border: 1px solid #cfe0ff;
+}
+
+.loading-title {
+  font-weight: 900;
+  color: var(--primary-dark);
+  margin-bottom: 10px;
+}
+
+.loading-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.loading-steps span {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: var(--text);
+}
