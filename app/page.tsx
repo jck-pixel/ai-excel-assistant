@@ -124,27 +124,25 @@ async function copyFormula() {
   </div>
 
   <h1>
-    用中文描述需求，
+    用中文描述 Excel 需求
     <br />
-    30 秒完成 Excel 工作。
+    30 秒產生公式
   </h1>
 
   <p className="subtitle">
-    建立公式、修正公式、解釋公式、優化公式。
+    建立公式｜修正錯誤｜解釋公式｜最佳化公式
     <br />
-    不用記函數，不用查教學，
-    EverySheet 幫你完成。
+    不用記函數，不用查教學，EverySheet 幫你完成。
   </p>
 
   <div className="hero-rating">
-    ⭐⭐⭐⭐⭐
-    <span> 已幫助大量使用者快速完成 Excel 工作</span>
+    支援 Excel 365、Excel 2021、Google Sheets
   </div>
 </section>
 
       <section className="app-card">
         <label htmlFor="request">
-  請描述你的 Excel 需求
+  請輸入你的需求
 </label>
         <textarea
           id="request"
