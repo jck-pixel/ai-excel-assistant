@@ -250,11 +250,17 @@ A欄投入數量、B欄不良數量，計算良率
           </label>
         </div>
 
-        <div className="example-title">熱門需求</div>
+        <div className="example-title">
+  🔥 熱門需求（點一下即可開始）
+</div>
 
 <div className="examples">
   {examples.map((item) => (
-    <button className="example-btn" key={item.label} onClick={() => setRequest(item.text)}>
+    <button
+      className="example-btn"
+      key={item.label}
+      onClick={() => setRequest(item.text)}
+    >
       {item.label}
     </button>
   ))}
